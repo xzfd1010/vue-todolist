@@ -21,8 +21,7 @@ npm run build --report
 ## 一个简单的基于todomvc模板的todolist
 1. 前期项目配置：
   * 用todomvc-app-template中的index.html替换vue原有的html
-  * 在项目中npm install todomvc-app-css引入样式
-  <br>
+  * 在项目中npm install todomvc-app-css引入样式<br>
   至此项目的静态资源配置完毕
 2. 项目的功能实现：
  * 设置title<br>
