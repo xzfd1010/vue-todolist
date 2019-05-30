@@ -27,7 +27,10 @@ npm run build --report
  * 设置title<br>
  在data中添加title属性，绑定到h1上
  * 设置todo的遍历项<br>
-  用v-for语法（保留index留作它用）遍历data中的todos数组，数组每一个元素都是一个对象，第一个字段为content，代表当前内容；第二个字段为completed，标识是否完成；
+  用v-for语法（保留index留作它用）遍历data中的todos数组，数组每一个元素都是一个对象。<br>
+  第一个字段为content，代表当前内容；<br>
+  第二个字段为completed，标识是否完成；
+ * 根据todos是否为空来确定最后一行是否展示，利用v-show实现
  * 添加item的功能<br>
  在data上添加newTodo属性，在input输入框中进行双向绑定，利用trim修饰符去掉输入的前后空格;<br>
    添加键盘监听事件keyup.enter，响应事件为addTodo：addTodo对newTodo进行检测，如果为空则返回；否则添加到data的todos数组中；清空newTodo字段
