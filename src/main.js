@@ -4,25 +4,25 @@
 import 'todomvc-app-css/index.css'
 
 //引入Vue
-import Vue from 'vue/dist/vue.js'
-import Store from'./store'
+import Vue from 'vue'
+import Store from './store'
 
 //定义过滤器，根据完成状态进行渲染
 var filters = {
-  all(todos){
+  all (todos) {
     return todos
   },
-  active(todos){
+  active (todos) {
     return todos.filter((todo) => {
-      return !todo.completed;
+      return !todo.completed
     })
   },
-  completed(todos){
+  completed (todos) {
     return todos.filter((todo) => {
-      return todo.completed;
+      return todo.completed
     })
   },
-};
+}
 
 var vm = new Vue({
   el: '.todoapp',
@@ -36,59 +36,59 @@ var vm = new Vue({
     hashName: 'all'
   },
   methods: {
-    addTodo(){
+    addTodo () {
       if (!this.newTodo) {
-        return;
+        return
       }
       this.todos.push({
         content: this.newTodo,
         completed: false
-      });
-      this.newTodo = '';
+      })
+      this.newTodo = ''
     },
-    removeTodo(index){
-      this.todos.splice(index, 1);
+    removeTodo (index) {
+      this.todos.splice(index, 1)
     },
-    editTodo(todo){
-      this.editCache = todo.content;
-      this.editedTodo = todo;
+    editTodo (todo) {
+      this.editCache = todo.content
+      this.editedTodo = todo
     },
-    doneEdit(todo, index){
+    doneEdit (todo, index) {
       //取消编辑状态
-      this.editedTodo = null;
+      this.editedTodo = null
       if (!todo.content) {
-        this.removeTodo(index);
+        this.removeTodo(index)
       }
     },
-    cancelEdit(todo){
-      this.editedTodo = null;
-      todo.content = this.editCache;
+    cancelEdit (todo) {
+      this.editedTodo = null
+      todo.content = this.editCache
     },
-    clearCompleted(){
+    clearCompleted () {
       this.todos = filters.active(this.todos)
     }
 
   },
   //计算属性，监听
   computed: {
-    remain(){
-      return filters.active(this.todos).length;
+    remain () {
+      return filters.active(this.todos).length
     },
     //isAll监听全选状态
     isAll: {
-      get() {
+      get () {
         return this.remain === 0
       },
-      set(value){
+      set (value) {
         // console.log(value);
         this.todos.forEach((todos) => {
-          todos.completed = value;
+          todos.completed = value
         })
       }
     },
     //  路由过滤
-    filteredTodos(){
-      return filters[this.hashName](this.todos);
+    filteredTodos () {
+      return filters[this.hashName](this.todos)
     }
   },
   watch: {
@@ -100,21 +100,23 @@ var vm = new Vue({
     }
   },
   directives: {
-    focus(el, value){
+    focus (el, value) {
       if (value) {
         el.focus()
       }
     }
   }
-});
-function hashChange() {
-  let hashName = location.hash.replace(/#\/?/, '');
+})
+
+function hashChange () {
+  let hashName = location.hash.replace(/#\/?/, '')
   if (filters[hashName]) {
-    vm.hashName = hashName;
+    vm.hashName = hashName
   } else {
-    location.hash = '';
-    vm.hashName = 'all';
+    location.hash = ''
+    vm.hashName = 'all'
   }
 }
+
 //全局监听
-window.addEventListener('hashchange', hashChange);
+window.addEventListener('hashchange', hashChange)
