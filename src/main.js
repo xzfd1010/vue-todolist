@@ -33,7 +33,8 @@ var vm = new Vue({
     editedTodo: null,
     // remain:this.todos.length
     //表示路由的哈希值
-    hashName: 'all'
+    hashName: 'all',
+    key: 1
   },
   methods: {
     addTodo () {
@@ -66,8 +67,10 @@ var vm = new Vue({
     },
     clearCompleted () {
       this.todos = filters.active(this.todos)
+    },
+    handleClick (event) {
+      // 点击在input上，input变为true，对应的label改变状态。todos.completed 立刻改变为true，input立刻消失；filterTodos发生变化，但是页面已经渲染完毕了？completed属性变化的时候，立刻就渲染了；此时filterTodos变化，没有发生渲染
     }
-
   },
   //计算属性，监听
   computed: {
@@ -80,7 +83,6 @@ var vm = new Vue({
         return this.remain === 0
       },
       set (value) {
-        // console.log(value);
         this.todos.forEach((todos) => {
           todos.completed = value
         })
@@ -88,6 +90,9 @@ var vm = new Vue({
     },
     //  路由过滤
     filteredTodos () {
+      this.$nextTick(()=>{
+        this.key += 1
+      })
       return filters[this.hashName](this.todos)
     }
   },

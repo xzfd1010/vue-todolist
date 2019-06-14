@@ -17,14 +17,15 @@
   <section class="main">
     <input class="toggle-all" id="toggle-all" type="checkbox" v-model="isAll">
     <label for="toggle-all">Mark all as complete</label>
-    <ul class="todo-list">
+    <ul class="todo-list" :key="key">
       <li v-for="(todo,index) in filteredTodos"
-          :class="{completed:todo.completed,editing:todo == editedTodo}">
-        <div class="view">
+          :class="{completed:todo.completed,editing:todo == editedTodo}"
+          :key="index">
+        <div class="view" @click="handleClick">
           <input class="toggle"
                  type="checkbox"
                  v-model="todo.completed">
-          <label @dblclick="editTodo(todo)">{{todo.content}}</label>
+          <label @dblclick="editTodo(todo)" @click.stop="handleClick">{{todo.content}}</label>
           <button class="destroy"
                   @click="removeTodo(index)">
           </button>
