@@ -42,6 +42,7 @@ var vm = new Vue({
         return
       }
       this.todos.push({
+
         content: this.newTodo,
         completed: false
       })
@@ -90,9 +91,9 @@ var vm = new Vue({
     },
     //  路由过滤
     filteredTodos () {
-      this.$nextTick(()=>{
-        this.key += 1
-      })
+      // this.$nextTick(()=>{
+      //   this.key += 1
+      // })
       return filters[this.hashName](this.todos)
     }
   },
