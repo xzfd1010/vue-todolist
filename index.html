@@ -20,7 +20,7 @@
     <ul class="todo-list" :key="key">
       <li v-for="(todo,index) in filteredTodos"
           :class="{completed:todo.completed,editing:todo == editedTodo}"
-          :key="todo.content">
+          :key="todo.id">
         <div class="view" @click="handleClick">
           <input class="toggle"
                  type="checkbox"
