@@ -42,7 +42,7 @@ var vm = new Vue({
         return
       }
       this.todos.push({
-        id: this.todos.length,
+        id: Math.random(),
         content: this.newTodo,
         completed: false
       })
